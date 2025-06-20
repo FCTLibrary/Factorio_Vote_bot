@@ -1,0 +1,33 @@
+name: Telegram UserBot
+
+on:
+  workflow_dispatch: # Запуск вручную
+  schedule:
+    - cron: '*/10 * * * *' # Запуск каждые 10 минут (можно чаще/реже)
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run the bot
+        env:
+          API_ID: ${{ secrets.API_ID }}
+          API_HASH: ${{ secrets.API_HASH }}
+          USER_SESSION: ${{ secrets.USER_SESSION }}
+          GROUP1_ID: ${{ secrets.GROUP1_ID }}
+          GROUP2_ID: ${{ secrets.GROUP2_ID }}
+          MODERATOR_IDS: ${{ secrets.MODERATOR_IDS }}
+        run: |
+          python3 -m bot.main
