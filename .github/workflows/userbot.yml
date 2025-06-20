@@ -1,9 +1,9 @@
 name: Telegram UserBot
 
 on:
-  workflow_dispatch: # Запуск вручную
+  workflow_dispatch:      # Ручной запуск
   schedule:
-    - cron: '*/10 * * * *' # Запуск каждые 10 минут (можно чаще/реже)
+    - cron: '*/10 * * * *'   # Автозапуск каждые 10 минут
 
 jobs:
   run-bot:
